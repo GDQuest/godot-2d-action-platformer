@@ -17,5 +17,8 @@ func _update(delta : float) -> void:
 	if owner.is_on_wall():
 		_transition_to("OnWall")
 	
+	if Input.is_action_just_released("Jump"):
+		owner.velocity.y /= 3.0
+	
 	if Input.is_action_just_pressed("Dash"):
 			_transition_to("Dash")
