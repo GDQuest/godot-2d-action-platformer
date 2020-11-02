@@ -1,7 +1,5 @@
 extends State
 
-var direction := Vector2.ZERO
-
 onready var _dash_time = $DashTime
 onready var _dash_cooldown = $DashCoolDown
 
@@ -10,8 +8,7 @@ func _enter(_msg: Dictionary = {}) -> void:
 	if _dash_cooldown.is_stopped():
 		_dash_cooldown.start()
 		owner.gravity_modifier = 0.0
-		direction = owner.global_position.direction_to(get_global_mouse_position())
-		owner.velocity = direction * owner.DASH_SPEED
+		owner.velocity = owner.aim_direction * owner.DASH_SPEED
 		_dash_time.start()
 	else:
 		next_state()
@@ -28,6 +25,6 @@ func _on_DashTime_timeout() -> void:
 
 func next_state():
 	if owner.is_on_floor():
-		_transition_to("Idle")
+		_state_machine.transition_to("Idle")
 	else:
-		_transition_to("Fall")
+		_state_machine.transition_to("Fall")

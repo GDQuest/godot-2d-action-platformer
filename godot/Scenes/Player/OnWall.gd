@@ -17,13 +17,13 @@ func _update(delta : float) -> void:
 		Input.get_action_strength("Left"))
 	
 	if !owner.is_on_wall() and forgiveness_time <= 0:
-		_transition_to("Fall", {"ledge_forgive" : true})
+		_state_machine.transition_to("Fall", {"ledge_forgive" : true})
 		return
 
 	if Input.is_action_just_pressed("Jump"):
 		owner.velocity = owner.JUMP_SPEED * wall_normal.rotated(45)
 		owner.velocity.x *= -1
-		_transition_to("Jump")
+		_state_machine.transition_to("Jump")
 		
 	if Input.is_action_just_pressed("Dash"):
-			_transition_to("Dash")
+			_state_machine.transition_to("Dash")

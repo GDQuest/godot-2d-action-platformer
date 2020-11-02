@@ -14,23 +14,23 @@ func _enter(_msg: Dictionary = {}) -> void:
 func _update(delta : float) -> void:
 	if owner.is_on_floor():
 		if !_input_buffer.is_stopped():
-			_transition_to("Jump")
+			_state_machine.transition_to("Jump")
 		else:
-			_transition_to("Idle")
+			_state_machine.transition_to("Idle")
 		
 	var target_speed = owner.speed * (Input.get_action_strength("Right") -
 		Input.get_action_strength("Left"))
 		
 	if Input.is_action_just_pressed("Jump"):
 		if !_ledge_forgive.is_stopped():
-			_transition_to("Jump")
+			_state_machine.transition_to("Jump")
 		else:
 			_input_buffer.start()
 			
 	if owner.is_on_wall():
-		_transition_to("OnWall")
+		_state_machine.transition_to("OnWall")
 	
 	owner.velocity.x = lerp(owner.velocity.x, target_speed, 0.1)
 	
 	if Input.is_action_just_pressed("Dash"):
-			_transition_to("Dash")
+			_state_machine.transition_to("Dash")

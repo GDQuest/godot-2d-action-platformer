@@ -19,6 +19,3 @@ func _enter(_msg: Dictionary = {}) -> void:
 func _exit() -> void:
 	pass
 
-
-func _transition_to(target_state_path: String, msg: Dictionary = {}) -> void:
-	_state_machine.transition_to(target_state_path, msg)
