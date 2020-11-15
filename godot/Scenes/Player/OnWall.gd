@@ -1,22 +1,32 @@
 extends State
 
-var forgiveness_time := 0.0
 var wall_normal := Vector2.ZERO
 var wall_friction := 0.3
 
 
 func _enter(_msg: Dictionary = {}) -> void:
-	forgiveness_time = 0.1
 	wall_normal = owner.get_slide_collision(0).normal
 
 
 func _update(delta : float) -> void:
-	forgiveness_time -= delta
 	owner.velocity.y -= owner.velocity.y * wall_friction
 	owner.velocity.x = owner.speed * (Input.get_action_strength("Right") -
 		Input.get_action_strength("Left"))
+		
+	if owner.velocity.x == 0:
+		owner.velocity.x = -owner.speed * sign(wall_normal.x)
 	
-	if !owner.is_on_wall() and forgiveness_time <= 0:
+	# Calculate aim direction according to movement inputs
+			
+	var vertical_aim := Input.get_action_strength("Down") - Input.get_action_strength("Up")
+	var horizontal_aim : float = sign(wall_normal.x)
+
+	owner.aim_direction = Vector2(horizontal_aim, vertical_aim).normalized()
+
+	if owner.aim_direction == Vector2.ZERO:
+		owner.aim_direction = Vector2.RIGHT*owner.facing_direction
+	
+	if !owner.is_on_wall():
 		_state_machine.transition_to("Fall", {"ledge_forgive" : true})
 		return
 

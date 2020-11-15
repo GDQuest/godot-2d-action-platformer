@@ -14,6 +14,16 @@ func _update(delta : float) -> void:
 	
 	owner.velocity.x = lerp(owner.velocity.x, target_speed, 0.1)
 	
+	# Calculate aim direction according to movement inputs
+			
+	var vertical_aim := Input.get_action_strength("Down") - Input.get_action_strength("Up")
+	var horizontal_aim : float = Input.get_action_strength("Right") - Input.get_action_strength("Left")
+
+	owner.aim_direction = Vector2(horizontal_aim, vertical_aim).normalized()
+
+	if owner.aim_direction == Vector2.ZERO:
+		owner.aim_direction = Vector2.RIGHT*owner.facing_direction
+	
 	if owner.is_on_wall():
 		_state_machine.transition_to("OnWall")
 	

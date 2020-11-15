@@ -10,6 +10,17 @@ func _enter(_msg: Dictionary = {}) -> void:
 		owner.gravity_modifier = 0.0
 		owner.velocity = owner.aim_direction * owner.DASH_SPEED
 		_dash_time.start()
+		
+			# Calculate aim direction according to movement inputs
+			
+		var vertical_aim := Input.get_action_strength("Down") - Input.get_action_strength("Up")
+		var horizontal_aim : float = Input.get_action_strength("Right") - Input.get_action_strength("Left")
+
+		owner.aim_direction = Vector2(horizontal_aim, vertical_aim).normalized()
+
+		if owner.aim_direction == Vector2.ZERO:
+			owner.aim_direction = Vector2.RIGHT*owner.facing_direction
+			
 	else:
 		next_state()
 

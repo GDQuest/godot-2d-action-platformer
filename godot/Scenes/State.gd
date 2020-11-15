@@ -12,10 +12,9 @@ func _update(delta : float) -> void:
 	pass
 
 
-func _enter(_msg: Dictionary = {}) -> void:
+func _enter(_msg := {}) -> void:
 	pass
 
 
 func _exit() -> void:
 	pass
-

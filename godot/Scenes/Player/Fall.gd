@@ -12,14 +12,25 @@ func _enter(_msg: Dictionary = {}) -> void:
 
 
 func _update(delta : float) -> void:
+	var target_speed = owner.speed * (Input.get_action_strength("Right") -
+		Input.get_action_strength("Left"))
+		
+	owner.velocity.x = lerp(owner.velocity.x, target_speed, 0.1)
+	# Calculate aim direction according to movement inputs
+			
+	var vertical_aim := Input.get_action_strength("Down") - Input.get_action_strength("Up")
+	var horizontal_aim : float = Input.get_action_strength("Right") - Input.get_action_strength("Left")
+
+	owner.aim_direction = Vector2(horizontal_aim, vertical_aim).normalized()
+
+	if owner.aim_direction == Vector2.ZERO:
+		owner.aim_direction = Vector2.RIGHT*owner.facing_direction
+		
 	if owner.is_on_floor():
 		if !_input_buffer.is_stopped():
 			_state_machine.transition_to("Jump")
 		else:
 			_state_machine.transition_to("Idle")
-		
-	var target_speed = owner.speed * (Input.get_action_strength("Right") -
-		Input.get_action_strength("Left"))
 		
 	if Input.is_action_just_pressed("Jump"):
 		if !_ledge_forgive.is_stopped():
@@ -29,8 +40,6 @@ func _update(delta : float) -> void:
 			
 	if owner.is_on_wall():
 		_state_machine.transition_to("OnWall")
-	
-	owner.velocity.x = lerp(owner.velocity.x, target_speed, 0.1)
 	
 	if Input.is_action_just_pressed("Dash"):
 			_state_machine.transition_to("Dash")

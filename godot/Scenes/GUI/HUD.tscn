@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Scenes/GUI/AmmoIndicator.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Scenes/GUI/HealthIndicator.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scenes/GUI/HUD.gd" type="Script" id=3]
+
+[node name="HUD" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HealthIndicator" parent="." instance=ExtResource( 2 )]
+
+[node name="AmmoIndicator" parent="." instance=ExtResource( 1 )]
+margin_top = 100.78
+margin_bottom = 100.78
