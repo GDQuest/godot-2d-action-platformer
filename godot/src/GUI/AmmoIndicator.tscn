@@ -1,0 +1,36 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://assets/gui/bullet_icon.svg" type="Texture" id=1]
+[ext_resource path="res://src/GUI/AmmoIndicator.gd" type="Script" id=2]
+
+
+
+
+
+[node name="AmmoIndicator" type="Control"]
+margin_right = 1280.0
+margin_bottom = 720.0
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+margin_left = 20.0
+margin_top = 20.0
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AmmoIcon" type="TextureRect" parent="HBoxContainer"]
+margin_right = 33.0
+margin_bottom = 58.0
+texture = ExtResource( 1 )
+
+[node name="Ammo" type="Label" parent="HBoxContainer"]
+margin_left = 37.0
+margin_top = 22.0
+margin_right = 37.0
+margin_bottom = 36.0

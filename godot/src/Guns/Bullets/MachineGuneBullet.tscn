@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://assets/character/character-placeholders.svg" type="Texture" id=1]
+[ext_resource path="res://src/Guns/Bullets/AreaBullet.gd" type="Script" id=2]
+
+
+
+
+[sub_resource type="CapsuleShape2D" id=1]
+radius = 5.08767
+height = 11.2738
+
+[node name="MachineGunBullet" type="Area2D"]
+collision_layer = 0
+collision_mask = 6
+script = ExtResource( 2 )
+speed = 3000
+
+[node name="Sprite" type="Sprite" parent="."]
+scale = Vector2( 2, 2 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 61, 85, 16, 8 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = 1.57079
+shape = SubResource( 1 )
