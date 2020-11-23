@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://src/Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://src/StateMachine.gd" type="Script" id=2]
@@ -9,9 +9,9 @@
 [ext_resource path="res://src/Player/Fall.gd" type="Script" id=7]
 [ext_resource path="res://src/Player/OnWall.gd" type="Script" id=8]
 [ext_resource path="res://src/Player/Dash.gd" type="Script" id=9]
-[ext_resource path="res://src/Guns/Pistol/Pistol.tscn" type="PackedScene" id=10]
-[ext_resource path="res://src/Guns/MachineGun/MachineGun.tscn" type="PackedScene" id=11]
-
+[ext_resource path="res://src/Guns/Pistol.tscn" type="PackedScene" id=10]
+[ext_resource path="res://src/Guns/MachineGun.tscn" type="PackedScene" id=11]
+[ext_resource path="res://src/Guns/GrenadeLauncher.tscn" type="PackedScene" id=12]
 
 [sub_resource type="RectangleShape2D" id=1]
 resource_local_to_scene = true
@@ -20,7 +20,7 @@ extents = Vector2( 17.1544, 50.919 )
 [node name="Player" type="KinematicBody2D"]
 collision_mask = 4
 script = ExtResource( 1 )
-available_guns_scenes = [ ExtResource( 10 ), ExtResource( 11 ) ]
+available_guns_scenes = [ ExtResource( 10 ), ExtResource( 11 ), ExtResource( 12 ) ]
 
 [node name="Body" type="Node2D" parent="."]
 

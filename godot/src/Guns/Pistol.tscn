@@ -1,16 +1,15 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://assets/character/character-placeholders.svg" type="Texture" id=1]
-[ext_resource path="res://src/Guns/Gun.gd" type="Script" id=2]
-[ext_resource path="res://src/Guns/Bullets/PistolBullet.tscn" type="PackedScene" id=3]
-
+[ext_resource path="res://src/Guns/Gun.gd" type="Script" id=1]
+[ext_resource path="res://src/Guns/Bullets/PistolBullet.tscn" type="PackedScene" id=2]
+[ext_resource path="res://assets/character/character-placeholders.svg" type="Texture" id=3]
 
 [node name="Pistol" type="Node2D"]
-script = ExtResource( 2 )
-bullet_scene = ExtResource( 3 )
+script = ExtResource( 1 )
+bullet_scene = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
-texture = ExtResource( 1 )
+texture = ExtResource( 3 )
 offset = Vector2( 16, 0 )
 region_enabled = true
 region_rect = Rect2( 67, 9, 47, 21 )
