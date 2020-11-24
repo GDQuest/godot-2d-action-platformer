@@ -12,7 +12,7 @@ func _update(delta : float) -> void:
 	var target_speed = owner.speed * (Input.get_action_strength("right") -
 		Input.get_action_strength("left"))
 	
-	owner.velocity.x = lerp(owner.velocity.x, target_speed, 0.1)
+	owner.velocity.x = lerp(owner.velocity.x, target_speed, 6*delta)
 	
 	# Calculate aim direction according to movement inputs
 			

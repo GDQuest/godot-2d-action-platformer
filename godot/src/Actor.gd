@@ -5,7 +5,7 @@ signal health_changed(new_health)
 signal max_health_changed(new_max_health)
 
 export var max_health := 5
-export var speed := 400
+export var speed := 576
 
 var health := max_health
 

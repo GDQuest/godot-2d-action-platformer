@@ -4,7 +4,7 @@ extends Actor
 signal ammo_changed(new_ammo)
 
 const FLOOR_NORMAL := Vector2.UP
-const GRAVITY := 1800
+const GRAVITY := 1950.0
 const JUMP_SPEED := -900
 const DASH_SPEED := 2400
 
