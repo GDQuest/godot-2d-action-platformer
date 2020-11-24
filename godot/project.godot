@@ -29,6 +29,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/Player/Player.gd"
 }, {
+"base": "State",
+"class": "PlayerState",
+"language": "GDScript",
+"path": "res://src/Player/PlayerState.gd"
+}, {
 "base": "Actor",
 "class": "SimpleEnemy",
 "language": "GDScript",
@@ -49,6 +54,7 @@ _global_script_class_icons={
 "AreaBullet": "",
 "Gun": "",
 "Player": "",
+"PlayerState": "",
 "SimpleEnemy": "",
 "State": "",
 "StateMachine": ""

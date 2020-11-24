@@ -16,7 +16,7 @@ var gun_index := 0
 
 var velocity := Vector2.ZERO
 var aim_direction := Vector2.RIGHT
-var gravity_modifier := 1.0
+var gravity_multipler := 1.0
 var facing_direction := 1
 
 onready var body = $Body
@@ -33,9 +33,29 @@ func _ready() -> void:
 	gun_position.add_child(gun)
 
 
-func _input(event) -> void:
+func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("change_weapon"):
 		_set_gun(gun_index + 1)
+
+
+func _physics_process(delta: float) -> void:
+	if aim_direction.x != 0.0:
+		facing_direction = sign(aim_direction.x)
+	body.scale.x = facing_direction
+
+	gun.direction = aim_direction
+
+	velocity.y += GRAVITY * gravity_multipler * delta
+	velocity = move_and_slide(velocity, FLOOR_NORMAL)
+	get_global_mouse_position()
+
+
+func calculate_input_direction() -> Vector2:
+	return Vector2(Input.get_action_strength("right") - Input.get_action_strength("left"), Input.get_action_strength("down") - Input.get_action_strength("up")).normalized()
+
+
+func _on_gun_ammo_changed(new_ammo):
+	emit_signal("ammo_changed", new_ammo)
 
 
 func _set_gun(index := 0) -> void:
@@ -44,19 +64,3 @@ func _set_gun(index := 0) -> void:
 	gun = available_guns[gun_index]
 	gun_position.add_child(gun)
 	emit_signal("ammo_changed", gun.ammo)
-
-
-func _physics_process(delta) -> void:
-	if aim_direction.x != 0.0:
-		facing_direction = sign(aim_direction.x)
-	body.scale.x = facing_direction
-
-	gun.direction = aim_direction
-
-	velocity.y += GRAVITY * gravity_modifier * delta
-	velocity = move_and_slide(velocity, FLOOR_NORMAL)
-	get_global_mouse_position()
-
-
-func _on_gun_ammo_changed(new_ammo):
-	emit_signal("ammo_changed", new_ammo)
