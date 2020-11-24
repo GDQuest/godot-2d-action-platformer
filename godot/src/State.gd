@@ -8,7 +8,7 @@ func _ready() -> void:
 	yield(owner, "ready")
 
 
-func _update(delta : float) -> void:
+func _update(delta: float) -> void:
 	pass
 
 

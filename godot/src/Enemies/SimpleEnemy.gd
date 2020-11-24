@@ -17,9 +17,10 @@ onready var raycast_wall := $Body/WallRayCast
 onready var shoot_position := $Body/ShootPosition
 onready var shoot_area := $ShootArea
 
+
 func _physics_process(delta):
 	body.scale.x = -run_direction
-	
+
 	velocity.y += GRAVITY * delta
 	velocity.x *= speed_modifier
 	velocity = move_and_slide(velocity, FLOOR_NORMAL)
@@ -32,7 +33,8 @@ func _on_DetectionArea_body_entered(body):
 
 func _on_DetectionArea_body_exited(body):
 	target = null
-	
+
+
 func _die():
 	# Here we should transition to DEAD state
 	queue_free()

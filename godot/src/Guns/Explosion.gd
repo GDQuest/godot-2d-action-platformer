@@ -10,10 +10,11 @@ onready var hitbox := $HitBox
 
 
 func _ready():
-	yield(get_tree(),"physics_frame")
-	yield(get_tree(),"physics_frame")
+	yield(get_tree(), "physics_frame")
+	yield(get_tree(), "physics_frame")
 	_explode()
-	
+
+
 func _explode():
 	smoke.emitting = true
 	sparkles.emitting = true
@@ -23,4 +24,3 @@ func _explode():
 			body.take_damage(damage)
 	yield(get_tree().create_timer(1.1), "timeout")
 	queue_free()
-	

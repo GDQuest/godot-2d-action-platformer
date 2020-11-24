@@ -17,7 +17,7 @@ func take_damage(damage: int) -> void:
 	emit_signal("health_changed", health)
 	if health < max_health:
 		_die()
-	
+
+
 func _die():
 	pass
-

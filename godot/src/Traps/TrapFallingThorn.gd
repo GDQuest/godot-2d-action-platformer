@@ -10,18 +10,18 @@ onready var ray_cast := $RayCast2D
 onready var original_position := global_position
 
 
-func _physics_process(delta : float) -> void:
+func _physics_process(delta: float) -> void:
 	if is_falling:
-		speed += GRAVITY*delta
-		global_position.y += speed*delta
+		speed += GRAVITY * delta
+		global_position.y += speed * delta
 	else:
 		if ray_cast.is_colliding():
 			is_falling = true
 			ray_cast.enabled = false
 
 
-func _on_TrapFallingThorn_body_entered(body : PhysicsBody2D) -> void:
-	if not is_falling: 
+func _on_TrapFallingThorn_body_entered(body: PhysicsBody2D) -> void:
+	if not is_falling:
 		return
 	is_falling = false
 	speed = 0.0
@@ -34,9 +34,8 @@ func _on_TrapFallingThorn_body_entered(body : PhysicsBody2D) -> void:
 
 
 func _restore() -> void:
-	yield(get_tree().create_timer(1),"timeout")
+	yield(get_tree().create_timer(1), "timeout")
 	show()
 	sprite.frame = 0
 	global_position = original_position
 	ray_cast.enabled = true
-	

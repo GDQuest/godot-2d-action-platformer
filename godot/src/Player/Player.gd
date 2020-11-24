@@ -11,7 +11,7 @@ const DASH_SPEED := 2400
 export (Array, PackedScene) var available_guns_scenes
 var available_guns := []
 
-var gun : Gun
+var gun: Gun
 var gun_index := 0
 
 var velocity := Vector2.ZERO
@@ -25,18 +25,17 @@ onready var gun_position = $Body/GunPosition
 
 func _ready() -> void:
 	for gun_scene in available_guns_scenes:
-		var new_gun : Gun = gun_scene.instance()
+		var new_gun: Gun = gun_scene.instance()
 		new_gun.connect("ammo_changed", self, "_on_gun_ammo_changed")
 		available_guns.append(new_gun)
-		
+
 	gun = available_guns[0]
 	gun_position.add_child(gun)
 
 
 func _input(event) -> void:
-	
 	if event.is_action_pressed("change_weapon"):
-		_set_gun(gun_index+1)
+		_set_gun(gun_index + 1)
 
 
 func _set_gun(index := 0) -> void:
@@ -48,13 +47,12 @@ func _set_gun(index := 0) -> void:
 
 
 func _physics_process(delta) -> void:
-	
 	if aim_direction.x != 0.0:
 		facing_direction = sign(aim_direction.x)
 	body.scale.x = facing_direction
-	
+
 	gun.direction = aim_direction
-	
+
 	velocity.y += GRAVITY * gravity_modifier * delta
 	velocity = move_and_slide(velocity, FLOOR_NORMAL)
 	get_global_mouse_position()
