@@ -6,6 +6,8 @@ onready var hearth_container := $HearthContainer
 
 
 func set_max_health(_max_health: int) -> void:
+	for hearth in hearth_container.get_children():
+		hearth.queue_free()
 	max_health = _max_health
 	for i in max_health:
 		hearth_container.add_child(hearth_scene.instance())

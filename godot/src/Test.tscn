@@ -7,7 +7,7 @@
 [ext_resource path="res://src/Enemies/SimpleEnemy.tscn" type="PackedScene" id=5]
 [ext_resource path="res://src/Traps/TrapFloorSpikes.tscn" type="PackedScene" id=6]
 [ext_resource path="res://src/Traps/TrapFallingThorn.tscn" type="PackedScene" id=7]
-[ext_resource path="res://src/Guns/Explosion.tscn" type="PackedScene" id=8]
+[ext_resource path="res://src/GUI/UIStatsMenu.tscn" type="PackedScene" id=9]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( 32, 128, 256, 128, 256, 256, 32, 256 )
@@ -266,6 +266,9 @@ tile_data = PoolIntArray( -393220, 0, 65536, -393219, 0, 2, -393218, 0, 2, -3932
 
 [node name="HUD" parent="CanvasLayer" instance=ExtResource( 3 )]
 
+[node name="UIStatsMenu" parent="CanvasLayer" instance=ExtResource( 9 )]
+visible = false
+
 [node name="TrapFloorSpikes" parent="." instance=ExtResource( 6 )]
 position = Vector2( 1227.53, 358.328 )
 
@@ -281,6 +284,15 @@ position = Vector2( 1483.82, 358.328 )
 [node name="KinematicBody2D" parent="." instance=ExtResource( 5 )]
 position = Vector2( 326.262, 111.205 )
 
+[node name="KinematicBody2D2" parent="." instance=ExtResource( 5 )]
+position = Vector2( 839.42, -177.446 )
+
+[node name="KinematicBody2D3" parent="." instance=ExtResource( 5 )]
+position = Vector2( 1402.47, -925.801 )
+
+[node name="KinematicBody2D4" parent="." instance=ExtResource( 5 )]
+position = Vector2( -151.26, -957.873 )
+
 [node name="TrapFallingThorn" parent="." instance=ExtResource( 7 )]
 position = Vector2( 627.193, -529.194 )
 
@@ -294,10 +306,7 @@ position = Vector2( 710.937, -529.194 )
 position = Vector2( 753.7, -529.194 )
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
-position = Vector2( 780.749, -224.455 )
+position = Vector2( 763.134, -760.324 )
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 current = true
-
-[node name="Explosion" parent="." instance=ExtResource( 8 )]
-position = Vector2( 919.408, -197.78 )

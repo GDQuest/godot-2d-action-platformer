@@ -1,7 +1,8 @@
 class_name Player
 extends Actor
 
-signal ammo_changed(new_ammo)
+signal ammo_changed(ammo)
+signal points_changed(points)
 
 const FLOOR_NORMAL := Vector2.UP
 const GRAVITY := 1950.0
@@ -19,6 +20,11 @@ var aim_direction := Vector2.RIGHT
 var gravity_multipler := 1.0
 var facing_direction := 1
 
+# player stats
+var damage_increment := 0.0
+var speed_increment := 0.0
+var points := 0
+
 onready var body = $Body
 onready var gun_position = $Body/GunPosition
 
@@ -32,6 +38,7 @@ func _ready() -> void:
 	gun = available_guns[0]
 	gun_position.add_child(gun)
 
+	Events.connect("enemy_died", self, "add_points")
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("change_weapon"):
@@ -43,10 +50,13 @@ func _physics_process(delta: float) -> void:
 		facing_direction = sign(aim_direction.x)
 	body.scale.x = facing_direction
 
+	
 	gun.direction = aim_direction
+	if aim_direction == Vector2.ZERO:
+		gun.direction.x = facing_direction
 
 	velocity.y += GRAVITY * gravity_multipler * delta
-	velocity = move_and_slide(velocity, FLOOR_NORMAL)
+	velocity = move_and_slide(velocity * (1.0 + speed_increment), FLOOR_NORMAL)
 	get_global_mouse_position()
 
 
@@ -64,3 +74,7 @@ func _set_gun(index := 0) -> void:
 	gun = available_guns[gun_index]
 	gun_position.add_child(gun)
 	emit_signal("ammo_changed", gun.ammo)
+	
+func add_points(_points : int) -> void:
+	points += _points
+	emit_signal("points_changed", points)

@@ -10,6 +10,7 @@ var speed_modifier := 1.0
 var target = null
 
 export (PackedScene) var bullet_scene = preload("res://src/Guns/Bullets/EnemyBullet.tscn")
+export var points := 1
 
 onready var body := $Body
 onready var raycast_floor := $Body/FloorRayCast
@@ -37,4 +38,5 @@ func _on_DetectionArea_body_exited(body):
 
 func _die():
 	# Here we should transition to DEAD state
+	Events.emit_signal("enemy_died", points)
 	queue_free()

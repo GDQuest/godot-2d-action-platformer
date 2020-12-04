@@ -15,7 +15,7 @@
 
 [sub_resource type="RectangleShape2D" id=1]
 resource_local_to_scene = true
-extents = Vector2( 17.1544, 50.919 )
+extents = Vector2( 16, 48 )
 
 [node name="Player" type="KinematicBody2D"]
 collision_mask = 4

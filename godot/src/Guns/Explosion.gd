@@ -1,5 +1,7 @@
 extends Node2D
 
+signal explosion_ended
+
 export var damage := 2
 export var effect_frames := 2
 
@@ -23,4 +25,5 @@ func _explode():
 		if body.has_method("take_damage"):
 			body.take_damage(damage)
 	yield(get_tree().create_timer(1.1), "timeout")
+	emit_signal("explosion_ended")
 	queue_free()

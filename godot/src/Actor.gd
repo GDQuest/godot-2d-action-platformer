@@ -4,7 +4,7 @@ extends KinematicBody2D
 signal health_changed(new_health)
 signal max_health_changed(new_max_health)
 
-export var max_health := 5
+export var max_health := 5 setget set_max_health
 export var speed := 576
 
 var health := max_health
@@ -21,3 +21,8 @@ func take_damage(damage: int) -> void:
 
 func _die():
 	pass
+
+
+func set_max_health(new_max_health : int) -> void:
+	max_health = new_max_health
+	emit_signal("max_health_changed", max_health)
