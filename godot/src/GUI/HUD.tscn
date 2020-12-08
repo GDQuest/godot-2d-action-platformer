@@ -14,12 +14,14 @@ __meta__ = {
 }
 
 [node name="HealthIndicator" parent="." instance=ExtResource( 2 )]
+mouse_filter = 2
 
 [node name="PointsIndicator" parent="." instance=ExtResource( 1 )]
 anchor_left = 1.0
 anchor_right = 1.0
 margin_left = -320.0
 margin_right = 0.0
+mouse_filter = 2
 icon_texture = ExtResource( 4 )
 
 [node name="AmmoIndicator" parent="." instance=ExtResource( 1 )]
@@ -27,3 +29,4 @@ anchor_top = 1.0
 anchor_bottom = 1.0
 margin_top = -96.0
 margin_bottom = 0.0
+mouse_filter = 2

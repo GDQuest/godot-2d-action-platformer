@@ -6,8 +6,7 @@ func _update(_delta: float) -> void:
 		_state_machine.transition_to("Fall", {"ledge_forgive": true})
 		return
 
-	player.aim_direction = player.calculate_input_direction()
-	player.velocity.x = player.speed * player.aim_direction.x
+	player.velocity.x = player.speed * player.movement_direction.x
 
 	if is_equal_approx(player.velocity.x, 0.0):
 		_state_machine.transition_to("Idle")

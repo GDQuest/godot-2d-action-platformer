@@ -5,7 +5,9 @@ signal health_changed(new_health)
 signal max_health_changed(new_max_health)
 
 export var max_health := 5 setget set_max_health
-export var speed := 576
+
+# trhee tiles in a sec
+export var speed := 768
 
 var health := max_health
 

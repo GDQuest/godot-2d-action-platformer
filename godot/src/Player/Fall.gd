@@ -14,10 +14,9 @@ func _exit() -> void:
 
 
 func _update(delta: float) -> void:
-	player.aim_direction = player.calculate_input_direction()
-	var target_speed: float = player.speed * player.aim_direction.x
+	var target_speed: float = player.speed * player.movement_direction.x
 
-	player.velocity.x = lerp(player.velocity.x, target_speed, 6 * delta)
+	player.velocity.x = target_speed
 
 	if player.is_on_floor():
 		if not _input_buffer.is_stopped():

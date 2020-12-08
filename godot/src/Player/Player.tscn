@@ -62,6 +62,10 @@ one_shot = true
 [node name="OnWall" type="Node2D" parent="StateMachine"]
 script = ExtResource( 8 )
 
+[node name="ReleaseWallTimer" type="Timer" parent="StateMachine/OnWall"]
+wait_time = 0.15
+one_shot = true
+
 [node name="Dash" type="Node2D" parent="StateMachine"]
 script = ExtResource( 9 )
 
@@ -71,6 +75,5 @@ one_shot = true
 [node name="DashTime" type="Timer" parent="StateMachine/Dash"]
 wait_time = 0.15
 one_shot = true
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+[connection signal="timeout" from="StateMachine/OnWall/ReleaseWallTimer" to="StateMachine/OnWall" method="_on_ReleaseWallTimer_timeout"]
 [connection signal="timeout" from="StateMachine/Dash/DashTime" to="StateMachine/Dash" method="_on_DashTime_timeout"]

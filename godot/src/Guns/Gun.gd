@@ -36,7 +36,7 @@ func _physics_process(delta: float) -> void:
 			if Input.is_action_pressed("shoot") and _can_shoot():
 				_shoot()
 		MODE.CHARGE:
-			if Input.is_action_just_pressed("shoot") and _can_shoot():
+			if Input.is_action_pressed("shoot") and _can_shoot():
 				is_charging = true
 			if Input.is_action_just_released("shoot") and is_charging:
 				is_charging = false

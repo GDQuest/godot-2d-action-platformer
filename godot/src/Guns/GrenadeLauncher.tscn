@@ -8,8 +8,9 @@
 script = ExtResource( 1 )
 bullet_scene = ExtResource( 2 )
 max_ammo = 10
-shoot_rate = 2.0
+shoot_rate = 1.0
 mode = 2
+max_charge_time = 1.0
 
 [node name="ShootPosition" type="Position2D" parent="."]
 position = Vector2( 48.8219, 0 )

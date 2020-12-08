@@ -17,4 +17,3 @@ func _update(_delta: float) -> void:
 	elif Input.is_action_pressed("left") or Input.is_action_pressed("right"):
 		_state_machine.transition_to("Run")
 
-	player.aim_direction = player.calculate_input_direction()
