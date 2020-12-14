@@ -30,3 +30,4 @@ func _on_SpeedButton_purchased_stat(increment : float) -> void:
 
 func _on_HealthButton_purchased_stat(increment : float) -> void:
 	player.max_health += increment
+	player.health = player.max_health

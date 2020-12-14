@@ -12,7 +12,7 @@ load_path = "res://.import/character-placeholders.svg-dbe4f34a33c64f8b03702ce98b
 collision_layer = 0
 collision_mask = 5
 script = ExtResource( 1 )
-speed = 1000
+speed = 600
 
 [node name="Sprite" type="Sprite" parent="."]
 modulate = Color( 0, 1, 0.768627, 1 )

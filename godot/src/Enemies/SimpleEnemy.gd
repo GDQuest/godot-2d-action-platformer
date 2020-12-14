@@ -40,3 +40,5 @@ func _die():
 	# Here we should transition to DEAD state
 	Events.emit_signal("enemy_died", points)
 	queue_free()
+
+
