@@ -11,10 +11,10 @@
 extents = Vector2( 36.2981, 37.082 )
 
 [sub_resource type="CircleShape2D" id=2]
-radius = 431.709
+radius = 640.05
 
 [sub_resource type="CircleShape2D" id=3]
-radius = 296.225
+radius = 448.071
 
 [node name="SimpleEnemy" type="KinematicBody2D"]
 collision_layer = 2

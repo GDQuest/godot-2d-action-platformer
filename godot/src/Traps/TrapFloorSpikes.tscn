@@ -65,6 +65,7 @@ extents = Vector2( 30.9796, 25.25 )
 extents = Vector2( 30.5, 25 )
 
 [node name="TrapFloorSpikes" type="Area2D"]
+scale = Vector2( 0.75, 0.75 )
 collision_layer = 0
 script = ExtResource( 2 )
 

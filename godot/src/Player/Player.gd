@@ -5,15 +5,14 @@ signal ammo_changed(ammo)
 signal points_changed(points)
 
 const FLOOR_NORMAL := Vector2.UP
-# NOTE: gravity and jump speed will become const once we find a value we like
-# for now, they are calculated at ready function
-var GRAVITY : float
-var JUMP_SPEED : float
 
 const DASH_SPEED := 3500
 
 export (Array, PackedScene) var available_guns_scenes
 var available_guns := []
+
+var gravity : float
+var jump_speed : float
 
 var gun: Gun
 var gun_index := 0
@@ -44,13 +43,13 @@ func _ready() -> void:
 	# hardcoded and make those vars consts again, once we find something we like
 	
 	# max height to 1.5 tile size
-	var max_jump_height := 384.0 
+	var max_jump_height := 128*1.5
 	# jump duration of 0.35 sec
-	var jump_duration = 0.35
+	var jump_duration = 0.3
 	# calculate gravity
-	GRAVITY = 2 * max_jump_height / pow(0.35, 2)
+	gravity = 2 * max_jump_height / pow(jump_duration, 2)
 	# calculate jump speed
-	JUMP_SPEED = -sqrt(2 * GRAVITY * 384)
+	jump_speed = -sqrt(2 * gravity * 384)
 	
 	for gun_scene in available_guns_scenes:
 		var new_gun: Gun = gun_scene.instance()
@@ -95,7 +94,7 @@ func _physics_process(delta: float) -> void:
 	if aim_direction == Vector2.ZERO:
 		gun.direction.x = facing_direction
 
-	velocity.y += GRAVITY * gravity_multipler * delta
+	velocity.y += gravity * gravity_multipler * delta
 	velocity = move_and_slide(velocity * (1.0 + speed_increment), FLOOR_NORMAL)
 	get_global_mouse_position()
 

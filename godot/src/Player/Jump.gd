@@ -2,7 +2,7 @@ extends PlayerState
 
 
 func _enter(_msg: Dictionary = {}) -> void:
-	player.velocity.y = player.JUMP_SPEED
+	player.velocity.y = player.jump_speed
 
 
 func _update(delta: float) -> void:
@@ -28,3 +28,6 @@ func _update(delta: float) -> void:
 
 	if Input.is_action_just_pressed("dash"):
 		_state_machine.transition_to("Dash")
+	
+	if player.is_on_wall():
+		_state_machine.transition_to("OnWall")

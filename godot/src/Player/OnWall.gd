@@ -50,7 +50,7 @@ func _update(_delta: float) -> void:
 		_state_machine.transition_to("Dash")
 	
 	elif Input.is_action_just_pressed("jump"):
-		player.velocity = player.JUMP_SPEED * wall_normal.rotated(45)
+		player.velocity = player.jump_speed * wall_normal.rotated(45)
 		player.velocity.x *= -1
 		_state_machine.transition_to("Jump")
 		

@@ -10,7 +10,6 @@ load_path = "res://.import/character-placeholders.svg-dbe4f34a33c64f8b03702ce98b
 
 [node name="Area2D" type="Area2D"]
 collision_layer = 0
-collision_mask = 5
 script = ExtResource( 1 )
 speed = 600
 
