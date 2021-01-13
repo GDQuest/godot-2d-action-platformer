@@ -3,16 +3,18 @@ extends Actor
 
 const FLOOR_NORMAL := Vector2.UP
 
-export var dash_speed := 3500
-export var max_jump_height := 128 * 1.5
+export var jump_height := 192
 export var jump_duration = 0.3
+export var dash_distance := 600.0
+export var dash_duration := 0.25
 
 export (Array, PackedScene) var available_guns_scenes
 var available_guns := []
 
-# We calculate the gravity and jump force
-var gravity: float
-var jump_speed: float
+# We calculate the gravity and jump force below.
+var gravity := -1.0
+var jump_speed := -1.0
+var dash_speed := -1.0
 
 var gun: Gun
 var gun_index := 0
@@ -23,9 +25,12 @@ var movement_direction := Vector2.RIGHT
 var gravity_multipler := 1.0
 var facing_direction := 1
 
+var can_dash := true
+
 # player stats
 var damage_increment := 0.0
 var speed_increment := 0.0
+
 onready var is_joypad_connected := Input.get_connected_joypads().size() > 0
 
 onready var _body = $Body
@@ -36,8 +41,9 @@ func _ready() -> void:
 	# To set how we should calculate aim direction
 	Input.connect("joy_connection_changed", self, "_on_joy_connection_changed")
 
-	gravity = 2 * max_jump_height / pow(jump_duration, 2)
+	gravity = 2 * jump_height / pow(jump_duration, 2)
 	jump_speed = -sqrt(2 * gravity * 384)
+	dash_speed = dash_distance / dash_duration
 
 	for gun_scene in available_guns_scenes:
 		var new_gun: Gun = gun_scene.instance()
@@ -48,16 +54,10 @@ func _ready() -> void:
 
 
 func _unhandled_input(event: InputEvent) -> void:
-	if is_joypad_connected:
-		if event.is_action_pressed("next_weapon"):
-			_set_gun(gun_index + 1)
-		elif event.is_action_pressed("previous_weapon"):
-			_set_gun(gun_index - 1)
-	else:
-		if event.is_action_pressed("next_weapon"):
-			_set_gun(gun_index + 1)
-		if event.is_action_pressed("previous_weapon"):
-			_set_gun(gun_index - 1)
+	if event.is_action_pressed("next_weapon"):
+		_set_gun(gun_index + 1)
+	elif event.is_action_pressed("previous_weapon"):
+		_set_gun(gun_index - 1)
 
 
 func _physics_process(delta: float) -> void:
@@ -66,10 +66,10 @@ func _physics_process(delta: float) -> void:
 
 	var new_facing_direction: float
 
-	if not is_joypad_connected:
-		new_facing_direction = global_position.direction_to(get_global_mouse_position()).x
-	else:
+	if is_joypad_connected:
 		new_facing_direction = aim_direction.x
+	else:
+		new_facing_direction = global_position.direction_to(get_global_mouse_position()).x
 
 	if not is_equal_approx(new_facing_direction, 0.0):
 		facing_direction = int(sign(new_facing_direction))

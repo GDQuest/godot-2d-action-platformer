@@ -10,6 +10,7 @@ onready var _release_timer := $ReleaseWallTimer
 
 
 func _enter(_msg: Dictionary = {}) -> void:
+	player.can_dash = true
 	wall_normal = player.get_slide_collision(0).normal
 	player.velocity.x = -player.speed * sign(wall_normal.x)
 

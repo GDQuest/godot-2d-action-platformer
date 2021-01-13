@@ -13,17 +13,16 @@
 [ext_resource path="res://Guns/MachineGun.tscn" type="PackedScene" id=11]
 [ext_resource path="res://Guns/GrenadeLauncher.tscn" type="PackedScene" id=12]
 
-
-
-
 [sub_resource type="RectangleShape2D" id=1]
 resource_local_to_scene = true
 extents = Vector2( 16, 48 )
 
 [node name="Player" type="KinematicBody2D"]
+position = Vector2( 0, -53.5 )
 collision_mask = 4
 script = ExtResource( 1 )
 speed = 600
+jump_duration = 0.26
 available_guns_scenes = [ ExtResource( 10 ), ExtResource( 11 ), ExtResource( 12 ) ]
 
 [node name="Body" type="Node2D" parent="."]
@@ -72,9 +71,6 @@ one_shot = true
 
 [node name="Dash" type="Node" parent="StateMachine"]
 script = ExtResource( 9 )
-
-[node name="DashCoolDown" type="Timer" parent="StateMachine/Dash"]
-one_shot = true
 
 [node name="DashTime" type="Timer" parent="StateMachine/Dash"]
 wait_time = 0.15

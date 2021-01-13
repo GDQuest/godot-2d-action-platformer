@@ -2,6 +2,7 @@ extends PlayerState
 
 
 func _enter(_msg := {}) -> void:
+	player.can_dash = true
 	player.velocity.x = 0
 
 
