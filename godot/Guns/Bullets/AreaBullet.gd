@@ -8,6 +8,7 @@ var direction := Vector2.RIGHT setget set_direction
 
 
 func _ready() -> void:
+	set_as_toplevel(true)
 	connect("body_entered", self, "hit_body")
 
 
