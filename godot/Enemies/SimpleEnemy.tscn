@@ -48,9 +48,9 @@ shape = SubResource( 1 )
 
 [node name="StateMachine" type="Node" parent="."]
 script = ExtResource( 3 )
-initial_state = NodePath("Patroll")
+initial_state = NodePath("Patrol")
 
-[node name="Patroll" type="Node2D" parent="StateMachine"]
+[node name="Patrol" type="Node2D" parent="StateMachine"]
 script = ExtResource( 4 )
 
 [node name="Chase" type="Node2D" parent="StateMachine"]
