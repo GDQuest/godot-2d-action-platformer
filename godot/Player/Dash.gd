@@ -4,6 +4,10 @@ onready var _dash_timer: Timer = $DashTime
 
 
 func _enter(_msg: Dictionary = {}) -> void:
+	if not player.can_dash:
+		_go_to_next_state()
+		return
+
 	player.can_dash = false
 	player.gravity_multipler = 0.0
 	player.velocity = player.aim_direction * player.dash_speed
