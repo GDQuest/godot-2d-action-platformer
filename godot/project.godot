@@ -48,11 +48,6 @@ _global_script_classes=[ {
 "class": "StateMachine",
 "language": "GDScript",
 "path": "res://Shared/StateMachine.gd"
-}, {
-"base": "Control",
-"class": "UIValueDisplay",
-"language": "GDScript",
-"path": "res://GUI/UIValueDisplay.gd"
 } ]
 _global_script_class_icons={
 "Actor": "",
@@ -62,8 +57,7 @@ _global_script_class_icons={
 "PlayerState": "",
 "SimpleEnemy": "",
 "State": "",
-"StateMachine": "",
-"UIValueDisplay": ""
+"StateMachine": ""
 }
 
 [application]

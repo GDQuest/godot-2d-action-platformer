@@ -1,17 +1,13 @@
 class_name Gun
 extends Node2D
 
-signal ammo_changed(new_ammo)
-
 enum MODE { NORMAL, AUTOMATIC, CHARGE }
 
 export (PackedScene) var bullet_scene
-export var max_ammo := 100
 export var shoot_rate := 0.25
 export (MODE) var mode := MODE.NORMAL
 export var max_charge_time := 2.0
 
-var ammo := max_ammo
 var direction := Vector2.ZERO
 var charge_time := 0.0
 var is_charging := false
@@ -47,16 +43,17 @@ func _physics_process(delta: float) -> void:
 
 func _shoot() -> void:
 	_shoot_timer.start()
+
 	var bullet = bullet_scene.instance()
 	bullet.direction = direction
-	get_tree().get_root().add_child(bullet)
+	add_child(bullet)
 	bullet.global_position = _shoot_position.global_position
+
 	if "charge" in bullet:
 		bullet.charge = charge_time / max_charge_time
+
 	charge_time = 0.0
-	ammo -= 1
-	emit_signal("ammo_changed", ammo)
 
 
 func _can_shoot() -> bool:
-	return _shoot_timer.is_stopped() and ammo > 0
+	return _shoot_timer.is_stopped()

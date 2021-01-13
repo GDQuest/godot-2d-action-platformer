@@ -1,8 +1,6 @@
 class_name Player
 extends Actor
 
-signal ammo_changed(ammo)
-
 const FLOOR_NORMAL := Vector2.UP
 
 export var dash_speed := 3500
@@ -43,13 +41,10 @@ func _ready() -> void:
 
 	for gun_scene in available_guns_scenes:
 		var new_gun: Gun = gun_scene.instance()
-		new_gun.connect("ammo_changed", self, "_on_gun_ammo_changed")
 		available_guns.append(new_gun)
 
 	gun = available_guns[0]
 	_gun_position.add_child(gun)
-
-
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -104,17 +99,11 @@ func calculate_aim_direction() -> Vector2:
 	return direction
 
 
-# TODO: remove ammo count from player and UI connection
-func _on_gun_ammo_changed(new_ammo):
-	emit_signal("ammo_changed", new_ammo)
-
-
 func _set_gun(index := 0) -> void:
 	_gun_position.remove_child(gun)
 	gun_index = wrapi(index, 0, available_guns.size())
 	gun = available_guns[gun_index]
 	_gun_position.add_child(gun)
-	emit_signal("ammo_changed", gun.ammo)
 
 
 func _on_joy_connection_changed(_device_id: int, connected: bool) -> void:
