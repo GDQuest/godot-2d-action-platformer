@@ -8,9 +8,9 @@ func _enter(_msg: Dictionary = {}) -> void:
 	if _dash_cooldown.is_stopped() or player.is_on_floor() or player.is_on_wall():
 		_dash_cooldown.start()
 		player.gravity_multipler = 0.0
-		player.velocity = player.aim_direction * player.DASH_SPEED
+		player.velocity = player.aim_direction * player.dash_speed
 		if is_equal_approx(player.velocity.length(), 0.0):
-			player.velocity.x = player.facing_direction * player.DASH_SPEED
+			player.velocity.x = player.facing_direction * player.dash_speed
 		_dash_timer.start()
 
 	else:

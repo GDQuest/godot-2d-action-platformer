@@ -38,6 +38,5 @@ func _on_DetectionArea_body_exited(_body):
 
 
 func _die():
-	# Here we should transition to DEAD state
 	Events.emit_signal("enemy_died", points)
 	queue_free()

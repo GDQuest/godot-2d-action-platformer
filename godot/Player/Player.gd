@@ -2,15 +2,17 @@ class_name Player
 extends Actor
 
 signal ammo_changed(ammo)
-signal points_changed(points)
 
 const FLOOR_NORMAL := Vector2.UP
 
-export var DASH_SPEED := 3500
+export var dash_speed := 3500
+export var max_jump_height := 128 * 1.5
+export var jump_duration = 0.3
 
 export (Array, PackedScene) var available_guns_scenes
 var available_guns := []
 
+# We calculate the gravity and jump force
 var gravity: float
 var jump_speed: float
 
@@ -26,8 +28,6 @@ var facing_direction := 1
 # player stats
 var damage_increment := 0.0
 var speed_increment := 0.0
-var points := 0
-
 onready var is_joypad_connected := Input.get_connected_joypads().size() > 0
 
 onready var _body = $Body
@@ -38,16 +38,7 @@ func _ready() -> void:
 	# To set how we should calculate aim direction
 	Input.connect("joy_connection_changed", self, "_on_joy_connection_changed")
 
-	# Calculate gravity and jump speed for desired movement. This can be
-	# hardcoded and make those vars consts again, once we find something we like
-
-	# max height to 1.5 tile size
-	var max_jump_height := 128 * 1.5
-	# jump duration of 0.35 sec
-	var jump_duration = 0.3
-	# calculate gravity
 	gravity = 2 * max_jump_height / pow(jump_duration, 2)
-	# calculate jump speed
 	jump_speed = -sqrt(2 * gravity * 384)
 
 	for gun_scene in available_guns_scenes:
@@ -58,7 +49,7 @@ func _ready() -> void:
 	gun = available_guns[0]
 	_gun_position.add_child(gun)
 
-	Events.connect("enemy_died", self, "add_points")
+
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -113,6 +104,7 @@ func calculate_aim_direction() -> Vector2:
 	return direction
 
 
+# TODO: remove ammo count from player and UI connection
 func _on_gun_ammo_changed(new_ammo):
 	emit_signal("ammo_changed", new_ammo)
 
@@ -123,11 +115,6 @@ func _set_gun(index := 0) -> void:
 	gun = available_guns[gun_index]
 	_gun_position.add_child(gun)
 	emit_signal("ammo_changed", gun.ammo)
-
-
-func add_points(_points: int) -> void:
-	points += _points
-	emit_signal("points_changed", points)
 
 
 func _on_joy_connection_changed(_device_id: int, connected: bool) -> void:
