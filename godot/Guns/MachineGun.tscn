@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Guns/Gun.gd" type="Script" id=1]
+[ext_resource path="res://Guns/Bullets/MachineGuneBullet.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Player/character-placeholders.svg" type="Texture" id=3]
+
+
+
+[node name="MachineGun" type="Node2D"]
+script = ExtResource( 1 )
+bullet_scene = ExtResource( 2 )
+shoot_rate = 0.1
+mode = 1
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 3 )
+offset = Vector2( 16.1959, 7.9917 )
+region_enabled = true
+region_rect = Rect2( 60, 52, 58, 30 )
+
+[node name="ShootPosition" type="Position2D" parent="."]
+position = Vector2( 38.2068, 0 )
+
+[node name="ShootTimer" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true

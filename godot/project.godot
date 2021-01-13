@@ -12,42 +12,42 @@ _global_script_classes=[ {
 "base": "KinematicBody2D",
 "class": "Actor",
 "language": "GDScript",
-"path": "res://src/Actor.gd"
+"path": "res://Shared/Actor.gd"
 }, {
 "base": "Area2D",
 "class": "AreaBullet",
 "language": "GDScript",
-"path": "res://src/Guns/Bullets/AreaBullet.gd"
+"path": "res://Guns/Bullets/AreaBullet.gd"
 }, {
 "base": "Node2D",
 "class": "Gun",
 "language": "GDScript",
-"path": "res://src/Guns/Gun.gd"
+"path": "res://Guns/Gun.gd"
 }, {
 "base": "Actor",
 "class": "Player",
 "language": "GDScript",
-"path": "res://src/Player/Player.gd"
+"path": "res://Player/Player.gd"
 }, {
 "base": "State",
 "class": "PlayerState",
 "language": "GDScript",
-"path": "res://src/Player/PlayerState.gd"
+"path": "res://Player/PlayerState.gd"
 }, {
 "base": "Actor",
 "class": "SimpleEnemy",
 "language": "GDScript",
-"path": "res://src/Enemies/SimpleEnemy.gd"
+"path": "res://Enemies/SimpleEnemy.gd"
 }, {
-"base": "Node2D",
+"base": "Node",
 "class": "State",
 "language": "GDScript",
-"path": "res://src/State.gd"
+"path": "res://Shared/State.gd"
 }, {
 "base": "Node",
 "class": "StateMachine",
 "language": "GDScript",
-"path": "res://src/StateMachine.gd"
+"path": "res://Shared/StateMachine.gd"
 } ]
 _global_script_class_icons={
 "Actor": "",
@@ -63,12 +63,12 @@ _global_script_class_icons={
 [application]
 
 config/name="action-platformer"
-run/main_scene="res://src/Test.tscn"
+run/main_scene="res://Main.tscn"
 config/icon="res://icon.png"
 
 [autoload]
 
-Events="*res://src/Events.gd"
+Events="*res://Events.gd"
 
 [display]
 

@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://World/Traps/trap_falling_thorn.svg" type="Texture" id=1]
+[ext_resource path="res://World/Traps/TrapFallingThorn.gd" type="Script" id=2]
+
+
+
+
+[sub_resource type="CapsuleShape2D" id=1]
+
+[node name="TrapFallingThorn" type="Area2D"]
+collision_layer = 0
+collision_mask = 5
+script = ExtResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 1 )
+hframes = 2
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+enabled = true
+cast_to = Vector2( 0, 512 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )
+[connection signal="body_entered" from="." to="." method="_on_TrapFallingThorn_body_entered"]

@@ -1,0 +1,78 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://Enemies/SimpleEnemy.gd" type="Script" id=1]
+[ext_resource path="res://Enemies/simple_enemy.svg" type="Texture" id=2]
+[ext_resource path="res://Shared/StateMachine.gd" type="Script" id=3]
+[ext_resource path="res://Enemies/Patrol.gd" type="Script" id=4]
+[ext_resource path="res://Enemies/Chase.gd" type="Script" id=5]
+[ext_resource path="res://Enemies/Shoot.gd" type="Script" id=6]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 36.2981, 37.082 )
+
+[sub_resource type="CircleShape2D" id=2]
+radius = 640.05
+
+[sub_resource type="CircleShape2D" id=3]
+radius = 448.071
+
+[node name="SimpleEnemy" type="KinematicBody2D"]
+collision_layer = 2
+collision_mask = 4
+script = ExtResource( 1 )
+max_health = 3
+speed = 150
+
+[node name="Body" type="Node2D" parent="."]
+
+[node name="FloorRayCast" type="RayCast2D" parent="Body"]
+position = Vector2( -38, 35 )
+enabled = true
+exclude_parent = false
+cast_to = Vector2( 0, 10 )
+collision_mask = 4
+
+[node name="Sprite" type="Sprite" parent="Body"]
+texture = ExtResource( 2 )
+
+[node name="WallRayCast" type="RayCast2D" parent="Body"]
+position = Vector2( -38.3881, 0 )
+cast_to = Vector2( -10, 0 )
+collision_mask = 4
+
+[node name="ShootPosition" type="Position2D" parent="Body"]
+position = Vector2( -17.9797, -2.24746 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )
+
+[node name="StateMachine" type="Node" parent="."]
+script = ExtResource( 3 )
+initial_state = NodePath("Patroll")
+
+[node name="Patroll" type="Node2D" parent="StateMachine"]
+script = ExtResource( 4 )
+
+[node name="Chase" type="Node2D" parent="StateMachine"]
+script = ExtResource( 5 )
+
+[node name="Shoot" type="Node2D" parent="StateMachine"]
+script = ExtResource( 6 )
+
+[node name="ShootTimer" type="Timer" parent="StateMachine/Shoot"]
+
+[node name="DetectionArea" type="Area2D" parent="."]
+visible = false
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea"]
+shape = SubResource( 2 )
+
+[node name="ShootArea" type="Area2D" parent="."]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ShootArea"]
+shape = SubResource( 3 )
+[connection signal="timeout" from="StateMachine/Shoot/ShootTimer" to="StateMachine/Shoot" method="_on_ShootTimer_timeout"]
+[connection signal="body_entered" from="DetectionArea" to="." method="_on_DetectionArea_body_entered"]
+[connection signal="body_exited" from="DetectionArea" to="." method="_on_DetectionArea_body_exited"]

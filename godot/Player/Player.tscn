@@ -1,0 +1,83 @@
+[gd_scene load_steps=14 format=2]
+
+[ext_resource path="res://Player/Player.gd" type="Script" id=1]
+[ext_resource path="res://Shared/StateMachine.gd" type="Script" id=2]
+[ext_resource path="res://Player/character-placeholders.svg" type="Texture" id=3]
+[ext_resource path="res://Player/Idle.gd" type="Script" id=4]
+[ext_resource path="res://Player/Run.gd" type="Script" id=5]
+[ext_resource path="res://Player/Jump.gd" type="Script" id=6]
+[ext_resource path="res://Player/Fall.gd" type="Script" id=7]
+[ext_resource path="res://Player/OnWall.gd" type="Script" id=8]
+[ext_resource path="res://Player/Dash.gd" type="Script" id=9]
+[ext_resource path="res://Guns/Pistol.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Guns/MachineGun.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Guns/GrenadeLauncher.tscn" type="PackedScene" id=12]
+
+
+
+
+[sub_resource type="RectangleShape2D" id=1]
+resource_local_to_scene = true
+extents = Vector2( 16, 48 )
+
+[node name="Player" type="KinematicBody2D"]
+collision_mask = 4
+script = ExtResource( 1 )
+speed = 600
+available_guns_scenes = [ ExtResource( 10 ), ExtResource( 11 ), ExtResource( 12 ) ]
+
+[node name="Body" type="Node2D" parent="."]
+
+[node name="icon" type="Sprite" parent="Body"]
+texture = ExtResource( 3 )
+region_enabled = true
+region_rect = Rect2( 9, 9, 41, 107 )
+
+[node name="GunPosition" type="Position2D" parent="Body"]
+position = Vector2( 16, -8 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )
+
+[node name="StateMachine" type="Node" parent="."]
+script = ExtResource( 2 )
+initial_state = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="StateMachine"]
+script = ExtResource( 4 )
+
+[node name="Run" type="Node" parent="StateMachine"]
+script = ExtResource( 5 )
+
+[node name="Jump" type="Node" parent="StateMachine"]
+script = ExtResource( 6 )
+
+[node name="Fall" type="Node" parent="StateMachine"]
+script = ExtResource( 7 )
+
+[node name="LedgeForgivenessTimer" type="Timer" parent="StateMachine/Fall"]
+wait_time = 0.15
+one_shot = true
+
+[node name="InputBufferingTimer" type="Timer" parent="StateMachine/Fall"]
+wait_time = 0.15
+one_shot = true
+
+[node name="OnWall" type="Node" parent="StateMachine"]
+script = ExtResource( 8 )
+
+[node name="ReleaseWallTimer" type="Timer" parent="StateMachine/OnWall"]
+wait_time = 0.15
+one_shot = true
+
+[node name="Dash" type="Node" parent="StateMachine"]
+script = ExtResource( 9 )
+
+[node name="DashCoolDown" type="Timer" parent="StateMachine/Dash"]
+one_shot = true
+
+[node name="DashTime" type="Timer" parent="StateMachine/Dash"]
+wait_time = 0.15
+one_shot = true
+[connection signal="timeout" from="StateMachine/OnWall/ReleaseWallTimer" to="StateMachine/OnWall" method="_on_ReleaseWallTimer_timeout"]
+[connection signal="timeout" from="StateMachine/Dash/DashTime" to="StateMachine/Dash" method="_on_DashTime_timeout"]
