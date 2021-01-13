@@ -13,6 +13,8 @@ func _enter(_msg: Dictionary = {}) -> void:
 	player.velocity = player.aim_direction * player.dash_speed
 	if is_equal_approx(player.velocity.length(), 0.0):
 		player.velocity.x = player.facing_direction * player.dash_speed
+
+	_dash_timer.wait_time = player.dash_duration
 	_dash_timer.start()
 
 

@@ -23,6 +23,8 @@ collision_mask = 4
 script = ExtResource( 1 )
 speed = 600
 jump_duration = 0.26
+dash_distance = 300.0
+dash_duration = 0.12
 available_guns_scenes = [ ExtResource( 10 ), ExtResource( 11 ), ExtResource( 12 ) ]
 
 [node name="Body" type="Node2D" parent="."]
