@@ -15,7 +15,7 @@
 
 [sub_resource type="RectangleShape2D" id=1]
 resource_local_to_scene = true
-extents = Vector2( 16, 48 )
+extents = Vector2( 16.7302, 33.3212 )
 
 [node name="Player" type="KinematicBody2D"]
 position = Vector2( 0, -53.5 )
@@ -28,14 +28,17 @@ available_guns_scenes = [ ExtResource( 10 ), ExtResource( 11 ), ExtResource( 12 
 [node name="Body" type="Node2D" parent="."]
 
 [node name="icon" type="Sprite" parent="Body"]
+position = Vector2( 0, 17.0089 )
+scale = Vector2( 1, 0.682076 )
 texture = ExtResource( 3 )
 region_enabled = true
 region_rect = Rect2( 9, 9, 41, 107 )
 
 [node name="GunPosition" type="Position2D" parent="Body"]
-position = Vector2( 16, -8 )
+position = Vector2( 28.9142, 16.5685 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0, 16.694 )
 shape = SubResource( 1 )
 
 [node name="StateMachine" type="Node" parent="."]
