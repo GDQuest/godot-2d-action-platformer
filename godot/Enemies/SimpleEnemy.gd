@@ -29,8 +29,8 @@ func _physics_process(delta):
 	get_global_mouse_position()
 
 
-func _on_DetectionArea_body_entered(body):
-	target = body
+func _on_DetectionArea_body_entered(_body):
+	target = _body
 
 
 func _on_DetectionArea_body_exited(_body):
