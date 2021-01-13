@@ -11,8 +11,6 @@ export var speed := 768
 
 var health := max_health
 
-onready var state_machine := $StateMachine
-
 
 func take_damage(damage: int) -> void:
 	health -= damage

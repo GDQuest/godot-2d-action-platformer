@@ -16,12 +16,12 @@ var direction := Vector2.ZERO
 var charge_time := 0.0
 var is_charging := false
 
-onready var shoot_timer := $ShootTimer
-onready var shoot_position := $ShootPosition
+onready var _shoot_timer := $ShootTimer
+onready var _shoot_position := $ShootPosition
 
 
 func _ready():
-	shoot_timer.wait_time = shoot_rate
+	_shoot_timer.wait_time = shoot_rate
 
 
 func _physics_process(delta: float) -> void:
@@ -46,11 +46,11 @@ func _physics_process(delta: float) -> void:
 
 
 func _shoot() -> void:
-	shoot_timer.start()
+	_shoot_timer.start()
 	var bullet = bullet_scene.instance()
 	bullet.direction = direction
 	get_tree().get_root().add_child(bullet)
-	bullet.global_position = shoot_position.global_position
+	bullet.global_position = _shoot_position.global_position
 	if "charge" in bullet:
 		bullet.charge = charge_time / max_charge_time
 	charge_time = 0.0
@@ -59,4 +59,4 @@ func _shoot() -> void:
 
 
 func _can_shoot() -> bool:
-	return shoot_timer.is_stopped() and ammo > 0
+	return _shoot_timer.is_stopped() and ammo > 0

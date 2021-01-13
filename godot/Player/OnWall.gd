@@ -6,7 +6,7 @@ var friction_modifier := 1.0
 var wall_normal := Vector2.ZERO
 var release_wall := false
 
-onready var release_timer := $ReleaseWallTimer
+onready var _release_timer := $ReleaseWallTimer
 
 
 func _enter(_msg: Dictionary = {}) -> void:
@@ -16,7 +16,7 @@ func _enter(_msg: Dictionary = {}) -> void:
 
 func _exit() -> void:
 	release_wall = false
-	release_timer.stop()
+	_release_timer.stop()
 	friction_modifier = 1.0
 
 
@@ -27,9 +27,9 @@ func _update(_delta: float) -> void:
 	var away_from_wall := sign(player.movement_direction.x * wall_normal.x) > 0
 
 	if not away_from_wall:
-		release_timer.stop()
-	elif release_timer.is_stopped():
-		release_timer.start()
+		_release_timer.stop()
+	elif _release_timer.is_stopped():
+		_release_timer.start()
 
 	if not release_wall:
 		player.velocity.x = -player.speed * sign(wall_normal.x)

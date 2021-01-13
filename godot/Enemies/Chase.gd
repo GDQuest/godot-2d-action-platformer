@@ -5,7 +5,7 @@ func _enter(_msg := {}) -> void:
 	owner.speed_modifier = 2.0
 
 
-func _update(delta: float) -> void:
+func _update(_delta: float) -> void:
 	if owner.target == null:
 		_state_machine.transition_to("Patroll")
 		return

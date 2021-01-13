@@ -5,7 +5,7 @@ func _enter(_msg := {}) -> void:
 	owner.speed_modifier = 1.0
 
 
-func _update(delta: float) -> void:
+func _update(_delta: float) -> void:
 	owner.velocity.x = owner.speed * owner.run_direction
 
 	owner.raycast_floor.force_raycast_update()

@@ -1,10 +1,10 @@
 extends Control
 
-var player: Player
+var _player: Player
 
-onready var damage_button := $HBoxContainer/DamageButton
-onready var speed_button := $HBoxContainer/SpeedButton
-onready var health_button := $HBoxContainer/HealthButton
+onready var _damage_button := $HBoxContainer/DamageButton
+onready var _speed_button := $HBoxContainer/SpeedButton
+onready var _health_button := $HBoxContainer/HealthButton
 
 
 func _input(event):
@@ -13,21 +13,21 @@ func _input(event):
 		visible = get_tree().paused
 
 
-func initialize(_player: Player) -> void:
-	player = _player
-	damage_button.initialize(player)
-	speed_button.initialize(player)
-	health_button.initialize(player)
+func initialize(player: Player) -> void:
+	_player = player
+	_damage_button.initialize(_player)
+	_speed_button.initialize(_player)
+	_health_button.initialize(_player)
 
 
 func _on_DamageButton_purchased_stat(increment: float) -> void:
-	player.damage_increment = increment
+	_player.damage_increment = increment
 
 
 func _on_SpeedButton_purchased_stat(increment: float) -> void:
-	player.speed_increment = increment
+	_player.speed_increment = increment
 
 
-func _on_HealthButton_purchased_stat(increment: float) -> void:
-	player.max_health += increment
-	player.health = player.max_health
+func _on_HealthButton_purchased_stat(increment: int) -> void:
+	_player.max_health += increment
+	_player.health = _player.max_health

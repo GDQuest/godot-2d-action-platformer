@@ -12,11 +12,12 @@ var target = null
 export (PackedScene) var bullet_scene = preload("EnemyBullet.tscn")
 export var points := 1
 
-onready var body := $Body
 onready var raycast_floor := $Body/FloorRayCast
 onready var raycast_wall := $Body/WallRayCast
 onready var shoot_position := $Body/ShootPosition
 onready var shoot_area := $ShootArea
+
+onready var body := $Body
 
 
 func _physics_process(delta):
@@ -32,7 +33,7 @@ func _on_DetectionArea_body_entered(body):
 	target = body
 
 
-func _on_DetectionArea_body_exited(body):
+func _on_DetectionArea_body_exited(_body):
 	target = null
 
 

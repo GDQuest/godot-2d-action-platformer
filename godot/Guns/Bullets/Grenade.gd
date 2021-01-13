@@ -1,20 +1,21 @@
 extends RigidBody2D
 
-const max_impulse := 2000.0
+const Explosion := preload("Explosion.tscn")
 
-var explosion_scene := preload("Explosion.tscn")
+export var max_impulse := 2000.0
+
 var direction := Vector2.RIGHT setget set_direction
 var charge := 0.0 setget set_charge
 
-onready var sprite := $Sprite
+onready var _sprite := $Sprite
 
 
 func _on_Timer_timeout():
-	var explosion = explosion_scene.instance()
+	var explosion = Explosion.instance()
 	add_child(explosion)
 	explosion.set_as_toplevel(true)
 	explosion.global_position = global_position
-	sprite.hide()
+	_sprite.hide()
 	sleeping = true
 	yield(explosion, "explosion_ended")
 	queue_free()

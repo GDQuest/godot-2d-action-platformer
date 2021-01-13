@@ -28,11 +28,10 @@ var damage_increment := 0.0
 var speed_increment := 0.0
 var points := 0
 
-# input type
-onready var joy_connected := Input.get_connected_joypads().size() > 0
+onready var is_joypad_connected := Input.get_connected_joypads().size() > 0
 
-onready var body = $Body
-onready var gun_position = $Body/GunPosition
+onready var _body = $Body
+onready var _gun_position = $Body/GunPosition
 
 
 func _ready() -> void:
@@ -57,13 +56,13 @@ func _ready() -> void:
 		available_guns.append(new_gun)
 
 	gun = available_guns[0]
-	gun_position.add_child(gun)
+	_gun_position.add_child(gun)
 
 	Events.connect("enemy_died", self, "add_points")
 
 
 func _unhandled_input(event: InputEvent) -> void:
-	if joy_connected:
+	if is_joypad_connected:
 		if event.is_action_pressed("next_weapon"):
 			_set_gun(gun_index + 1)
 		elif event.is_action_pressed("previous_weapon"):
@@ -81,15 +80,15 @@ func _physics_process(delta: float) -> void:
 
 	var new_facing_direction: float
 
-	if not joy_connected:
+	if not is_joypad_connected:
 		new_facing_direction = global_position.direction_to(get_global_mouse_position()).x
 	else:
 		new_facing_direction = aim_direction.x
 
 	if not is_equal_approx(new_facing_direction, 0.0):
-		facing_direction = sign(new_facing_direction)
+		facing_direction = int(sign(new_facing_direction))
 
-	body.scale.x = facing_direction
+	_body.scale.x = facing_direction
 
 	gun.direction = aim_direction
 	if aim_direction == Vector2.ZERO:
@@ -105,13 +104,13 @@ func calculate_movement_direction() -> Vector2:
 
 
 func calculate_aim_direction() -> Vector2:
-	var aim_direction: Vector2
-	if joy_connected:
-		aim_direction = calculate_movement_direction()
+	var direction: Vector2
+	if is_joypad_connected:
+		direction = calculate_movement_direction()
 	else:
-		aim_direction = gun.global_position.direction_to(get_global_mouse_position())
+		direction = gun.global_position.direction_to(get_global_mouse_position())
 
-	return aim_direction
+	return direction
 
 
 func _on_gun_ammo_changed(new_ammo):
@@ -119,10 +118,10 @@ func _on_gun_ammo_changed(new_ammo):
 
 
 func _set_gun(index := 0) -> void:
-	gun_position.remove_child(gun)
+	_gun_position.remove_child(gun)
 	gun_index = wrapi(index, 0, available_guns.size())
 	gun = available_guns[gun_index]
-	gun_position.add_child(gun)
+	_gun_position.add_child(gun)
 	emit_signal("ammo_changed", gun.ammo)
 
 
@@ -131,5 +130,5 @@ func add_points(_points: int) -> void:
 	emit_signal("points_changed", points)
 
 
-func _on_joy_connection_changed(device_id: int, connected: bool) -> void:
-	joy_connected = connected
+func _on_joy_connection_changed(_device_id: int, connected: bool) -> void:
+	is_joypad_connected = connected

@@ -70,6 +70,10 @@ config/icon="res://icon.png"
 
 Events="*res://Events.gd"
 
+[debug]
+
+gdscript/warnings/return_value_discarded=false
+
 [display]
 
 window/size/width=1920

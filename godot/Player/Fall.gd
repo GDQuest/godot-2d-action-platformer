@@ -13,7 +13,7 @@ func _exit() -> void:
 	_ledge_forgive.stop()
 
 
-func _update(delta: float) -> void:
+func _update(_delta: float) -> void:
 	var target_speed: float = player.speed * player.movement_direction.x
 
 	player.velocity.x = target_speed

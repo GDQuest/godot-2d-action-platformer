@@ -18,7 +18,7 @@ func _enter(_msg: Dictionary = {}) -> void:
 
 
 #TODO: should dash stop prematurely?
-func _update(delta: float) -> void:
+func _update(_delta: float) -> void:
 #	if Input.is_action_just_released("dash"):
 #		_next_state()
 	if player.is_on_wall():
