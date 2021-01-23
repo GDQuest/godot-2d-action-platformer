@@ -12,12 +12,8 @@ onready var _sprite := $Sprite
 
 func _on_Timer_timeout():
 	var explosion = Explosion.instance()
-	add_child(explosion)
-	explosion.set_as_toplevel(true)
+	Projectiles.add_child(explosion)
 	explosion.global_position = global_position
-	_sprite.hide()
-	sleeping = true
-	yield(explosion, "explosion_ended")
 	queue_free()
 
 

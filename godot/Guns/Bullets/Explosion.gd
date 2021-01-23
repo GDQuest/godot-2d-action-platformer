@@ -18,6 +18,7 @@ func _ready():
 
 
 func _explode():
+	Events.emit_signal("shake_camera", 0.6)
 	_smoke.emitting = true
 	_sparkles.emitting = true
 	_fire.emitting = true

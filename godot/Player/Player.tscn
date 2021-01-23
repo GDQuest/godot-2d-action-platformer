@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://Shared/StateMachine.gd" type="Script" id=2]
@@ -12,6 +12,7 @@
 [ext_resource path="res://Guns/Pistol.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Guns/MachineGun.tscn" type="PackedScene" id=11]
 [ext_resource path="res://Guns/GrenadeLauncher.tscn" type="PackedScene" id=12]
+[ext_resource path="res://ActorMaterial.tres" type="Material" id=13]
 
 [sub_resource type="RectangleShape2D" id=1]
 resource_local_to_scene = true
@@ -29,7 +30,8 @@ available_guns_scenes = [ ExtResource( 10 ), ExtResource( 11 ), ExtResource( 12 
 
 [node name="Body" type="Node2D" parent="."]
 
-[node name="icon" type="Sprite" parent="Body"]
+[node name="Sprite" type="Sprite" parent="Body"]
+material = ExtResource( 13 )
 position = Vector2( 0, 17.0089 )
 scale = Vector2( 1, 0.682076 )
 texture = ExtResource( 3 )
@@ -80,5 +82,7 @@ script = ExtResource( 9 )
 [node name="DashTime" type="Timer" parent="StateMachine/Dash"]
 wait_time = 0.15
 one_shot = true
+
+[node name="Tween" type="Tween" parent="."]
 [connection signal="timeout" from="StateMachine/OnWall/ReleaseWallTimer" to="StateMachine/OnWall" method="_on_ReleaseWallTimer_timeout"]
 [connection signal="timeout" from="StateMachine/Dash/DashTime" to="StateMachine/Dash" method="_on_DashTime_timeout"]

@@ -33,8 +33,10 @@ var speed_increment := 0.0
 
 onready var is_joypad_connected := Input.get_connected_joypads().size() > 0
 
-onready var _body = $Body
-onready var _gun_position = $Body/GunPosition
+onready var _body := $Body
+onready var _body_sprite := $Body/Sprite
+onready var _gun_position := $Body/GunPosition
+onready var _tween := $Tween
 
 
 func _ready() -> void:
@@ -108,3 +110,9 @@ func _set_gun(index := 0) -> void:
 
 func _on_joy_connection_changed(_device_id: int, connected: bool) -> void:
 	is_joypad_connected = connected
+	
+func take_damage(damage : int) -> void:
+	.take_damage(damage)
+	Events.emit_signal("shake_camera", 0.3)
+	_tween.interpolate_property(_body_sprite.get_material(), "shader_param/flash_amount", 1, 0, 0.15)
+	_tween.start()

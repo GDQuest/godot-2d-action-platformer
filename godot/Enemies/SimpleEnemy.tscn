@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Enemies/SimpleEnemy.gd" type="Script" id=1]
 [ext_resource path="res://Enemies/simple_enemy.svg" type="Texture" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://Enemies/Patrol.gd" type="Script" id=4]
 [ext_resource path="res://Enemies/Chase.gd" type="Script" id=5]
 [ext_resource path="res://Enemies/Shoot.gd" type="Script" id=6]
+[ext_resource path="res://ActorMaterial.tres" type="Material" id=7]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 36.2981, 37.082 )
@@ -33,6 +34,7 @@ cast_to = Vector2( 0, 10 )
 collision_mask = 4
 
 [node name="Sprite" type="Sprite" parent="Body"]
+material = ExtResource( 7 )
 texture = ExtResource( 2 )
 
 [node name="WallRayCast" type="RayCast2D" parent="Body"]
@@ -73,6 +75,8 @@ visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ShootArea"]
 shape = SubResource( 3 )
+
+[node name="Tween" type="Tween" parent="."]
 [connection signal="timeout" from="StateMachine/Shoot/ShootTimer" to="StateMachine/Shoot" method="_on_ShootTimer_timeout"]
 [connection signal="body_entered" from="DetectionArea" to="." method="_on_DetectionArea_body_entered"]
 [connection signal="body_exited" from="DetectionArea" to="." method="_on_DetectionArea_body_exited"]

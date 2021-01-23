@@ -7,6 +7,7 @@ export (PackedScene) var bullet_scene
 export var shoot_rate := 0.25
 export (MODE) var mode := MODE.NORMAL
 export var max_charge_time := 2.0
+export var spread_angle := 0.0
 
 var direction := Vector2.ZERO
 var charge_time := 0.0
@@ -18,6 +19,7 @@ onready var _shoot_position := $ShootPosition
 
 func _ready():
 	_shoot_timer.wait_time = shoot_rate
+	randomize()
 
 
 func _physics_process(delta: float) -> void:
@@ -45,8 +47,8 @@ func _shoot() -> void:
 	_shoot_timer.start()
 
 	var bullet = bullet_scene.instance()
-	bullet.direction = direction
-	add_child(bullet)
+	bullet.direction = direction.rotated(rand_range(-spread_angle, spread_angle))
+	Projectiles.add_child(bullet)
 	bullet.global_position = _shoot_position.global_position
 
 	if "charge" in bullet:

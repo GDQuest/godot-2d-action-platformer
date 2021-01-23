@@ -1,25 +1,24 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://Player/character-placeholders.svg" type="Texture" id=1]
+[ext_resource path="res://Player/pistolbullet.svg" type="Texture" id=1]
 [ext_resource path="res://Guns/Bullets/AreaBullet.gd" type="Script" id=2]
 
-
-
 [sub_resource type="CapsuleShape2D" id=1]
-radius = 8.62252
-height = 5.53503
+radius = 11.722
+height = 10.801
 
 [node name="PistolBullet" type="Area2D"]
 collision_layer = 0
 collision_mask = 6
 script = ExtResource( 2 )
-speed = 4000
+speed = 3500
 
 [node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 18.7089, 0 )
 texture = ExtResource( 1 )
-region_enabled = true
 region_rect = Rect2( 78, 34, 24, 16 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 18.7089, 0 )
 rotation = 1.57079
 shape = SubResource( 1 )

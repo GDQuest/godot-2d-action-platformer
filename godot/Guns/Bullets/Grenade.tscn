@@ -3,10 +3,7 @@
 [ext_resource path="res://Guns/Bullets/grenade.svg" type="Texture" id=1]
 [ext_resource path="res://Guns/Bullets/Grenade.gd" type="Script" id=2]
 
-
-
-
-[sub_resource type="PhysicsMaterial" id=3]
+[sub_resource type="PhysicsMaterial" id=1]
 bounce = 0.6
 
 [sub_resource type="CircleShape2D" id=2]
@@ -14,7 +11,7 @@ bounce = 0.6
 [node name="Grenade" type="RigidBody2D"]
 collision_layer = 0
 collision_mask = 7
-physics_material_override = SubResource( 3 )
+physics_material_override = SubResource( 1 )
 gravity_scale = 10.0
 script = ExtResource( 2 )
 

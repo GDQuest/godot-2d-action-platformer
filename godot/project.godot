@@ -69,6 +69,7 @@ config/icon="res://icon.png"
 [autoload]
 
 Events="*res://Events.gd"
+Projectiles="*res://World/Projectiles.tscn"
 
 [debug]
 

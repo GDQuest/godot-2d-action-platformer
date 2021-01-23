@@ -4,12 +4,9 @@
 [ext_resource path="res://Guns/Bullets/Grenade.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Player/character-placeholders.svg" type="Texture" id=3]
 
-
-
 [node name="GrenadeLauncher" type="Node2D"]
 script = ExtResource( 1 )
 bullet_scene = ExtResource( 2 )
-max_ammo = 10
 shoot_rate = 1.0
 mode = 2
 max_charge_time = 1.0
