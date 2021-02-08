@@ -1,4 +1,3 @@
 [gd_scene format=2]
 
 [node name="Projectiles" type="Node2D"]
-z_index = 1

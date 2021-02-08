@@ -8,6 +8,9 @@ export var jump_duration = 0.3
 export var dash_distance := 600.0
 export var dash_duration := 0.25
 
+# Position for the starting point. Will respawn here when player dies
+export var starting_position := Vector2(40, -925)
+
 export (Array, PackedScene) var available_guns_scenes
 var available_guns := []
 
@@ -116,3 +119,8 @@ func take_damage(damage : int) -> void:
 	Events.emit_signal("shake_camera", 0.3)
 	_tween.interpolate_property(_body_sprite.get_material(), "shader_param/flash_amount", 1, 0, 0.15)
 	_tween.start()
+
+func _die():
+	global_position = starting_position
+	health = max_health
+	emit_signal("health_changed", health)

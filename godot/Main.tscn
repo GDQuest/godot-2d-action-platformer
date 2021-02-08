@@ -256,6 +256,7 @@ points = PoolVector2Array( 112, 112, 16, 112, 16, 48, 112, 48 )
 script = ExtResource( 4 )
 
 [node name="TileMap" type="TileMap" parent="."]
+z_index = -1
 tile_set = SubResource( 25 )
 cell_size = Vector2( 128, 128 )
 collision_layer = 4
@@ -480,7 +481,7 @@ mouse_filter = 2
 visible = false
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
-position = Vector2( 39.0566, -924.373 )
+position = Vector2( 40, -925 )
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 current = true
